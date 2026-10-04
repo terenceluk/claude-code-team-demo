@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Waypoint</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%231d6fb8' d='M12 2C7.6 2 4 5.6 4 10c0 6 8 12 8 12s8-6 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Top navigation, shown once signed in -->
+  <header id="app-header" class="app-header hidden">
+    <div class="app-header__brand">Waypoint</div>
+    <nav class="app-header__nav">
+      <button id="nav-map" class="nav-link nav-link--active" type="button">Map</button>
+      <button id="nav-admin" class="nav-link hidden" type="button">Users</button>
+    </nav>
+    <div class="app-header__user">
+      <span id="current-user-email"></span>
+      <button id="btn-sign-out" class="btn btn--ghost" type="button">Sign out</button>
+    </div>
+  </header>
+
+  <main id="app-main">
+
+    <!-- ===================== SIGN IN ===================== -->
+    <section id="view-signin" class="view auth-view">
+      <div class="auth-card">
+        <h1 class="auth-card__title">Waypoint</h1>
+        <p class="auth-card__subtitle">Sign in to your travel map</p>
+        <form id="form-signin" novalidate>
+          <label class="field">
+            <span class="field__label">Email</span>
+            <input type="email" name="email" id="signin-email" required autocomplete="email" />
+          </label>
+          <label class="field">
+            <span class="field__label">Password</span>
+            <input type="password" name="password" id="signin-password" required autocomplete="current-password" />
+          </label>
+          <div id="signin-error" class="form-error hidden" role="alert"></div>
+          <button type="submit" class="btn btn--primary btn--block" id="signin-submit">Sign in</button>
+        </form>
+        <p class="auth-card__switch">
+          Need an account? <button type="button" class="link-btn" id="go-register">Register</button>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== REGISTER ===================== -->
+    <section id="view-register" class="view auth-view hidden">
+      <div class="auth-card">
+        <h1 class="auth-card__title">Waypoint</h1>
+        <p class="auth-card__subtitle">Create your account</p>
+        <form id="form-register" novalidate>
+          <label class="field">
+            <span class="field__label">Email</span>
+            <input type="email" name="email" id="register-email" required autocomplete="email" />
+          </label>
+          <label class="field">
+            <span class="field__label">Password</span>
+            <input type="password" name="password" id="register-password" required minlength="8" autocomplete="new-password" />
+          </label>
+          <p class="field__hint">At least 8 characters.</p>
+          <div id="register-error" class="form-error hidden" role="alert"></div>
+          <button type="submit" class="btn btn--primary btn--block" id="register-submit">Create account</button>
+        </form>
+        <p class="auth-card__switch">
+          Already have an account? <button type="button" class="link-btn" id="go-signin">Sign in</button>
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== MAP ===================== -->
+    <section id="view-map" class="view map-view hidden">
+      <aside class="pin-sidebar">
+        <div class="pin-sidebar__header">
+          <h2>Your pins</h2>
+          <button id="btn-add-pin" class="btn btn--primary btn--small" type="button">+ Add pin</button>
+        </div>
+        <div id="pin-list-status" class="list-status"></div>
+        <ul id="pin-list" class="pin-list"></ul>
+      </aside>
+      <div class="map-container">
+        <div id="svg-map-wrap" class="svg-map-wrap">
+          <div id="map-loading" class="map-loading">Loading map…</div>
+        </div>
+        <div id="map-hint" class="map-hint">Click anywhere on the map to add a pin</div>
+        <div id="pin-popup" class="pin-popup hidden" role="dialog" aria-label="Pin details">
+          <button type="button" class="pin-popup__close" id="pin-popup-close" aria-label="Close popup">&times;</button>
+          <div class="pin-popup__place" id="pin-popup-place"></div>
+          <div class="pin-popup__date" id="pin-popup-date"></div>
+          <div class="pin-popup__note" id="pin-popup-note"></div>
+          <div class="pin-popup__actions">
+            <button type="button" class="btn btn--small btn--ghost" id="pin-popup-edit">Edit</button>
+            <button type="button" class="btn btn--small btn--danger" id="pin-popup-delete">Delete</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ADMIN / USERS ===================== -->
+    <section id="view-admin" class="view admin-view hidden">
+      <div class="admin-panel">
+        <h2>All users</h2>
+        <div id="admin-status" class="list-status"></div>
+        <table class="admin-table" id="admin-table">
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Joined</th>
+              <th>Pins</th>
+            </tr>
+          </thead>
+          <tbody id="admin-table-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===================== ADD / EDIT PIN MODAL ===================== -->
+  <div id="pin-modal" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal__header">
+        <h3 id="pin-modal-title">Add pin</h3>
+        <button type="button" class="modal__close" id="pin-modal-close" aria-label="Close">&times;</button>
+      </div>
+      <form id="form-pin">
+        <input type="hidden" id="pin-id" />
+        <input type="hidden" id="pin-lat" />
+        <input type="hidden" id="pin-lng" />
+        <label class="field">
+          <span class="field__label">Place name</span>
+          <input type="text" id="pin-place" required />
+        </label>
+        <label class="field">
+          <span class="field__label">Visited date</span>
+          <input type="date" id="pin-date" required />
+        </label>
+        <label class="field">
+          <span class="field__label">Note</span>
+          <textarea id="pin-note" rows="3"></textarea>
+        </label>
+        <div id="pin-form-error" class="form-error hidden" role="alert"></div>
+        <div class="modal__actions">
+          <button type="button" id="pin-delete" class="btn btn--danger hidden">Delete</button>
+          <div class="modal__actions-right">
+            <button type="button" id="pin-cancel" class="btn btn--ghost">Cancel</button>
+            <button type="submit" class="btn btn--primary" id="pin-submit">Save pin</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast / status region for global messages -->
+  <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin · Waypoint</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <a class="brand" href="index.html">Waypoint</a>
+    <nav>
+      <span class="user-chip">Signed in as <strong data-user-email>…</strong></span>
+      <a href="index.html">My map</a>
+      <a href="admin.html" data-admin-link class="active" style="display:none">Admin</a>
+      <a href="#" data-sign-out>Sign out</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <div class="alert alert-error" id="page-error" role="alert"></div>
+    <div class="alert alert-error" id="forbidden" role="alert">
+      This page is only available to administrator accounts.
+      <a href="index.html">Return to your map</a>.
+    </div>
+
+    <section class="panel" id="admin-panel" style="display:none">
+      <h2>Registered users</h2>
+      <div id="users-status" class="spinner-row" style="display:none">Loading users…</div>
+      <table class="data-table" id="users-table" style="display:none">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Joined</th>
+          </tr>
+        </thead>
+        <tbody id="users-tbody"></tbody>
+      </table>
+      <p class="empty-state" id="users-empty" style="display:none">No users found.</p>
+    </section>
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

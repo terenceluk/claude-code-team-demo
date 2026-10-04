@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Waypoint · Your travel map</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <a class="brand" href="index.html">Waypoint</a>
+    <nav>
+      <span class="user-chip">Signed in as <strong data-user-email>…</strong></span>
+      <a href="index.html" class="active">My map</a>
+      <a href="admin.html" data-admin-link style="display:none">Admin</a>
+      <a href="#" data-sign-out>Sign out</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <div class="alert alert-error" id="page-error" role="alert"></div>
+
+    <div class="map-page-grid">
+      <section class="panel">
+        <h2>World map</h2>
+        <p class="map-hint">Click anywhere on the map to drop a pin for a place you've visited.</p>
+        <div id="map-container" aria-label="World map, click to add a pin"></div>
+      </section>
+
+      <section class="panel" id="pin-form-panel">
+        <h2>New pin</h2>
+        <form id="pin-form">
+          <div class="coord-row">
+            <div>
+              <label for="pin-lat">Latitude</label>
+              <input id="pin-lat" name="lat" type="number" step="any" min="-90" max="90" required />
+            </div>
+            <div>
+              <label for="pin-lng">Longitude</label>
+              <input id="pin-lng" name="lng" type="number" step="any" min="-180" max="180" required />
+            </div>
+          </div>
+          <p class="coord-readout">Click the map to fill these in automatically, or type coordinates directly.</p>
+
+          <label for="pin-name">Place name</label>
+          <input id="pin-name" name="name" type="text" placeholder="e.g. Kyoto, Japan" required />
+
+          <label for="pin-date">Date of visit</label>
+          <input id="pin-date" name="date" type="date" required />
+
+          <label for="pin-note">Note</label>
+          <textarea id="pin-note" name="note" rows="3" placeholder="What made this trip memorable?"></textarea>
+
+          <div class="form-actions">
+            <button type="submit" id="pin-submit">Add pin</button>
+            <button type="button" class="secondary" id="pin-cancel">Clear</button>
+          </div>
+
+          <div class="alert alert-error" id="pin-form-error" role="alert"></div>
+        </form>
+      </section>
+    </div>
+
+    <section class="panel" style="margin-top:1.25rem;">
+      <h2>Your pins</h2>
+      <div id="pins-status" class="spinner-row" style="display:none">Loading pins…</div>
+      <ul class="pin-list" id="pin-list"></ul>
+      <p class="empty-state" id="pin-empty" style="display:none">
+        You haven't added any pins yet. Click the map to add your first one.
+      </p>
+    </section>
+  </main>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

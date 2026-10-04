@@ -1,0 +1,16 @@
+{
+  "name": "waypoint-server",
+  "version": "1.0.0",
+  "description": "Waypoint personal travel map portal - API server",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "dependencies": {
+    "express": "^4.22.2"
+  }
+}

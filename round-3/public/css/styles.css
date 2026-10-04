@@ -1,0 +1,636 @@
+:root {
+  --color-bg: #f4f6f8;
+  --color-surface: #ffffff;
+  --color-border: #dbe1e6;
+  --color-primary: #1d6fb8;
+  --color-primary-dark: #145a94;
+  --color-danger: #c0392b;
+  --color-danger-dark: #9c2d20;
+  --color-text: #1f2933;
+  --color-text-muted: #64748b;
+  --radius: 8px;
+  --shadow: 0 2px 10px rgba(15, 23, 42, 0.08);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ===================== HEADER ===================== */
+
+.app-header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 10px 20px;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: var(--shadow);
+  position: relative;
+  z-index: 10;
+}
+
+.app-header__brand {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--color-primary-dark);
+}
+
+.app-header__nav {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+}
+
+.nav-link {
+  background: none;
+  border: none;
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+
+.nav-link:hover {
+  background: var(--color-bg);
+}
+
+.nav-link--active {
+  color: var(--color-primary-dark);
+  font-weight: 600;
+  background: #e8f1fa;
+}
+
+.app-header__user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+/* ===================== BUTTONS ===================== */
+
+.btn {
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  padding: 9px 16px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.btn--primary {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.btn--primary:hover {
+  background: var(--color-primary-dark);
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+.btn--ghost:hover {
+  background: var(--color-bg);
+}
+
+.btn--danger {
+  background: transparent;
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+.btn--danger:hover {
+  background: var(--color-danger);
+  color: #fff;
+}
+
+.btn--small {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: inherit;
+  padding: 0;
+}
+
+/* ===================== AUTH VIEWS ===================== */
+
+.auth-view {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 32px;
+}
+
+.auth-card__title {
+  margin: 0 0 4px;
+  color: var(--color-primary-dark);
+}
+
+.auth-card__subtitle {
+  margin: 0 0 20px;
+  color: var(--color-text-muted);
+}
+
+.auth-card__switch {
+  margin: 16px 0 0;
+  font-size: 0.9rem;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.field {
+  display: block;
+  margin-bottom: 14px;
+}
+
+.field__label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 9px 11px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  font-family: inherit;
+  background: #fff;
+  color: var(--color-text);
+}
+
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(29, 111, 184, 0.15);
+}
+
+.field__hint {
+  margin: -8px 0 14px;
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.form-error {
+  background: #fdecea;
+  color: var(--color-danger-dark);
+  border: 1px solid #f6c6bf;
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  margin-bottom: 14px;
+}
+
+/* ===================== MAP VIEW ===================== */
+
+.map-view {
+  display: flex;
+  height: calc(100vh - 57px);
+}
+
+.pin-sidebar {
+  width: 320px;
+  min-width: 260px;
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.pin-sidebar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.pin-sidebar__header h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.list-status {
+  padding: 10px 16px;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.list-status.error {
+  color: var(--color-danger-dark);
+}
+
+.pin-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.pin-list__item {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--color-border);
+  cursor: pointer;
+}
+
+.pin-list__item:hover {
+  background: var(--color-bg);
+}
+
+.pin-list__place {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 2px;
+}
+
+.pin-list__date {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+.pin-list__empty {
+  padding: 20px 16px;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.map-container {
+  flex: 1;
+  position: relative;
+  background: #bfe0f5;
+  overflow: hidden;
+}
+
+/* ===================== SVG WORLD MAP ===================== */
+
+.svg-map-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svg-map-wrap svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: crosshair;
+}
+
+.map-loading {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+}
+
+/* Colors for the bundled world-map.svg — the SVG only carries structural
+   classes (ocean / graticule / land), styling lives here so it matches
+   the rest of the app's palette. */
+.world-map-svg .ocean {
+  fill: #bfe0f5;
+}
+
+.world-map-svg .graticule line {
+  stroke: #ffffff;
+  stroke-width: 0.5;
+  opacity: 0.6;
+}
+
+.world-map-svg .land {
+  fill: #d8c9a3;
+  stroke: #a8996f;
+  stroke-width: 0.75;
+}
+
+.pin-marker {
+  fill: var(--color-primary);
+  stroke: #ffffff;
+  stroke-width: 1.5;
+  cursor: pointer;
+  transition: r 0.1s ease;
+}
+
+.pin-marker:hover,
+.pin-marker:focus {
+  fill: var(--color-primary-dark);
+  outline: none;
+  r: 8;
+}
+
+.pin-marker--active {
+  fill: var(--color-danger);
+}
+
+.pin-marker--pulse {
+  animation: pin-pulse 1.1s ease-out 2;
+}
+
+@keyframes pin-pulse {
+  0% {
+    r: 6;
+    opacity: 1;
+  }
+  50% {
+    r: 12;
+    opacity: 0.55;
+  }
+  100% {
+    r: 6;
+    opacity: 1;
+  }
+}
+
+.map-hint {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 6px 14px;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  box-shadow: var(--shadow);
+  z-index: 500;
+  pointer-events: none;
+}
+
+/* ===================== PIN POPUP (custom, HTML overlay) ===================== */
+
+.pin-popup {
+  /* left/top are set precisely (in px) by map.js positionPopup(), which
+     clamps the box to stay within the map container's edges. */
+  position: absolute;
+  min-width: 200px;
+  max-width: 260px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 14px 16px;
+  z-index: 600;
+}
+
+/* Arrow pointing down at the marker (default: popup sits above it).
+   Horizontal position tracks --arrow-x, set by JS, so it keeps pointing
+   at the marker even when the box itself has been shifted to stay
+   on-screen. */
+.pin-popup::after {
+  content: '';
+  position: absolute;
+  left: var(--arrow-x, 50%);
+  bottom: -7px;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background: var(--color-surface);
+  border-right: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+}
+
+/* Flipped: popup sits below the marker instead (not enough room above),
+   so the arrow moves to the top edge and points up. */
+.pin-popup--flipped::after {
+  top: -7px;
+  bottom: auto;
+  border-right: none;
+  border-bottom: none;
+  border-left: 1px solid var(--color-border);
+  border-top: 1px solid var(--color-border);
+  clip-path: polygon(0 100%, 100% 100%, 100% 0);
+}
+
+.pin-popup__close {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--color-text-muted);
+}
+
+.pin-popup__place {
+  font-weight: 600;
+  margin-right: 16px;
+  margin-bottom: 4px;
+}
+
+.pin-popup__date {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: 6px;
+}
+
+.pin-popup__note {
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+  white-space: pre-wrap;
+}
+
+.pin-popup__actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ===================== MODAL ===================== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.modal {
+  width: 100%;
+  max-width: 420px;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px 24px 24px;
+}
+
+.modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.modal__header h3 {
+  margin: 0;
+}
+
+.modal__close {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--color-text-muted);
+}
+
+.modal__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.modal__actions-right {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+/* ===================== ADMIN VIEW ===================== */
+
+.admin-view {
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.admin-panel {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px 24px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+}
+
+.admin-table th,
+.admin-table td {
+  text-align: left;
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 0.9rem;
+}
+
+.admin-table th {
+  color: var(--color-text-muted);
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* ===================== TOAST ===================== */
+
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1f2933;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  box-shadow: var(--shadow);
+  z-index: 2000;
+}
+
+.toast--error {
+  background: var(--color-danger-dark);
+}
+
+/* ===================== RESPONSIVE ===================== */
+
+@media (max-width: 800px) {
+  .map-view {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .pin-sidebar {
+    width: 100%;
+    max-height: 240px;
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .map-container {
+    height: 60vh;
+  }
+
+  .app-header {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .app-header__user {
+    order: 3;
+    width: 100%;
+    justify-content: flex-end;
+  }
+}

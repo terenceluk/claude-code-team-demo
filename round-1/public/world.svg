@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet" role="img" aria-labelledby="world-map-title">
+  <!--
+    Waypoint world map (hand-authored, simplified equirectangular projection).
+
+    Projection formula (must stay in sync with the lat/lon -> pixel logic in
+    app.js so that pins line up with the coastlines drawn here):
+
+      x = (longitude + 180) / 360 * 1000
+      y = (90 - latitude)   / 180 * 500
+
+    i.e. longitude -180..180 maps linearly to x 0..1000, and
+    latitude 90..-90 maps linearly to y 0..500. This is a plain
+    equirectangular (plate carree) projection: no trigonometry, fully
+    deterministic, and trivially invertible for click-to-lat/lon:
+
+      longitude = x / 1000 * 360 - 180
+      latitude  = 90 - y / 500 * 180
+
+    Coastline coordinates below are simplified/hand-picked approximations of
+    real coastlines (not traced from any bundled or downloaded dataset),
+    intended to be recognizable rather than survey-accurate.
+  -->
+  <title id="world-map-title">World map</title>
+  <style>
+    .ocean { fill: #dbeafe; }
+    .graticule { stroke: #bfdbfe; stroke-width: 0.5; }
+    .landmass { fill: #86a789; stroke: #5f7a63; stroke-width: 0.6; stroke-linejoin: round; }
+  </style>
+  <rect x="0" y="0" width="1000" height="500" class="ocean" />
+  <g class="graticule-group">
+    <line class="graticule" x1="0" y1="0" x2="0" y2="500" />
+    <line class="graticule" x1="83.3" y1="0" x2="83.3" y2="500" />
+    <line class="graticule" x1="166.7" y1="0" x2="166.7" y2="500" />
+    <line class="graticule" x1="250" y1="0" x2="250" y2="500" />
+    <line class="graticule" x1="333.3" y1="0" x2="333.3" y2="500" />
+    <line class="graticule" x1="416.7" y1="0" x2="416.7" y2="500" />
+    <line class="graticule" x1="500" y1="0" x2="500" y2="500" />
+    <line class="graticule" x1="583.3" y1="0" x2="583.3" y2="500" />
+    <line class="graticule" x1="666.7" y1="0" x2="666.7" y2="500" />
+    <line class="graticule" x1="750" y1="0" x2="750" y2="500" />
+    <line class="graticule" x1="833.3" y1="0" x2="833.3" y2="500" />
+    <line class="graticule" x1="916.7" y1="0" x2="916.7" y2="500" />
+    <line class="graticule" x1="1000" y1="0" x2="1000" y2="500" />
+    <line class="graticule" x1="0" y1="416.7" x2="1000" y2="416.7" />
+    <line class="graticule" x1="0" y1="333.3" x2="1000" y2="333.3" />
+    <line class="graticule" x1="0" y1="250" x2="1000" y2="250" />
+    <line class="graticule" x1="0" y1="166.7" x2="1000" y2="166.7" />
+    <line class="graticule" x1="0" y1="83.3" x2="1000" y2="83.3" />
+  </g>
+  <g class="landmasses">
+    <path id="north-america" class="landmass" d="M 41.7,61.1 L 69.4,55.6 111.1,55.6 152.8,55.6 236.1,61.1 277.8,77.8 291.7,88.9 319.4,111.1 352.8,119.4 333.3,125 305.6,133.3 291.7,152.8 277.8,180.6 275,180.6 230.6,177.8 230.6,205.6 255.6,211.1 266.7,225 280.6,227.8 269.4,222.2 250,208.3 230.6,194.4 208.3,188.9 180.6,166.7 175,158.3 155.6,138.9 155.6,116.7 138.9,97.2 111.1,83.3 83.3,83.3 55.6,88.9 41.7,83.3 41.7,61.1 Z" />
+    <path id="south-america" class="landmass" d="M 286.1,227.8 L 305.6,219.4 333.3,227.8 358.3,238.9 366.7,252.8 402.8,272.2 394.4,286.1 388.9,305.6 366.7,319.4 341.7,347.2 327.8,361.1 311.1,394.4 305.6,394.4 297.2,375 297.2,341.7 302.8,300 275,261.1 280.6,244.4 286.1,227.8 Z" />
+    <path id="africa" class="landmass" d="M 452.8,191.7 L 455.6,211.1 475,236.1 505.6,233.3 525,238.9 525,255.6 533.3,266.7 533.3,297.2 550,327.8 555.6,344.4 577.8,338.9 588.9,322.2 597.2,316.7 611.1,297.2 611.1,263.9 619.4,241.7 619.4,216.7 611.1,205.6 602.8,188.9 597.2,163.9 569.4,161.1 555.6,163.9 530.6,158.3 513.9,150 483.3,152.8 469.4,172.2 452.8,191.7 Z" />
+    <path id="europe" class="landmass" d="M 475,130.6 L 475,147.2 497.2,147.2 508.3,138.9 519.4,127.8 536.1,125 544.4,138.9 555.6,141.7 563.9,150 572.2,138.9 580.6,136.1 597.2,133.3 605.6,125 605.6,119.4 583.3,122.2 566.7,102.8 555.6,100 538.9,100 527.8,97.2 522.2,88.9 513.9,88.9 513.9,75 527.8,72.2 555.6,55.6 583.3,55.6 597.2,66.7 577.8,83.3 566.7,83.3 566.7,69.4 533.3,69.4 527.8,88.9 522.2,94.4 475,130.6 Z" />
+    <path id="asia" class="landmass" d="M 597.2,133.3 L 597.2,150 600,161.1 594.4,169.4 600,175 619.4,180.6 638.9,169.4 655.6,175 661.1,180.6 672.2,180.6 688.9,183.3 700,191.7 702.8,208.3 713.9,227.8 722.2,233.3 730.6,227.8 744.4,188.9 755.6,188.9 763.9,208.3 772.2,227.8 786.1,247.2 788.9,222.2 794.4,222.2 802.8,208.3 802.8,191.7 800,188.9 805.6,200 819.4,186.1 833.3,186.1 838.9,180.6 836.1,163.9 838.9,147.2 852.8,147.2 858.3,152.8 861.1,144.4 875,152.8 888.9,150 891.7,138.9 894.4,125 902.8,130.6 916.7,125 930.6,83.3 972.2,69.4 1000,61.1 972.2,61.1 944.4,55.6 916.7,50 888.9,47.2 833.3,44.4 777.8,38.9 722.2,47.2 666.7,61.1 638.9,61.1 611.1,66.7 597.2,66.7 583.3,83.3 597.2,133.3 Z" />
+    <path id="australia" class="landmass" d="M 813.9,311.1 L 816.7,322.2 819.4,344.4 827.8,347.2 858.3,338.9 866.7,338.9 877.8,347.2 883.3,347.2 888.9,355.6 902.8,355.6 908.3,355.6 916.7,352.8 925,327.8 925,319.4 916.7,311.1 902.8,297.2 894.4,280.6 880.6,283.3 869.4,283.3 861.1,283.3 855.6,291.7 844.4,297.2 838.9,300 813.9,311.1 Z" />
+    <path id="greenland" class="landmass" d="M 375,83.3 L 383.3,83.3 438.9,55.6 444.4,36.1 416.7,19.4 375,22.2 347.2,55.6 347.2,69.4 375,83.3 Z" />
+    <path id="british-isles" class="landmass" d="M 477.8,108.3 L 486.1,111.1 494.4,108.3 505.6,108.3 502.8,102.8 491.7,88.9 483.3,88.9 477.8,97.2 477.8,108.3 Z" />
+    <path id="japan" class="landmass" d="M 861.1,163.9 L 866.7,158.3 875,155.6 886.1,152.8 891.7,138.9 897.2,130.6 902.8,127.8 891.7,125 886.1,136.1 875,147.2 866.7,155.6 861.1,163.9 Z" />
+    <path id="madagascar" class="landmass" d="M 622.2,283.3 L 630.6,286.1 638.9,294.4 630.6,319.4 622.2,316.7 619.4,305.6 622.2,294.4 622.2,283.3 Z" />
+    <path id="new-zealand" class="landmass" d="M 980.6,363.9 L 986.1,352.8 994.4,355.6 991.7,361.1 983.3,363.9 980.6,375 966.7,375 972.2,366.7 980.6,363.9 Z" />
+    <path id="antarctica" class="landmass" d="M 0,425 L 83.3,433.3 166.7,427.8 250,436.1 333.3,430.6 416.7,438.9 500,433.3 583.3,441.7 666.7,430.6 750,436.1 833.3,427.8 916.7,433.3 1000,425 1000,500 0,500 0,425 Z" />
+  </g>
+</svg>
